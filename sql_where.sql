@@ -1,0 +1,19 @@
+CREATE TABLE st(
+	id INT PRIMARY KEY,
+	name VARCHAR(10)
+);
+
+INSERT INTO st VALUES
+(1,'NAME'),
+(2,'NAME'),
+(3,'PLACE'),
+(4,'PLACES'),
+(5,'ANIMAL'),
+(6,'THINGS');
+
+SELECT COUNT(*)
+FROM st
+WHERE name = 'NAME';
+
+SELECT * FROM st;
+
