@@ -40,7 +40,7 @@ LIMIT 1;
 --count per furniture type
 SELECT name, number
 FROM furniture
-GROUP BY name;;
+GROUP BY name, number;
 
 --highest - 2
 SELECT name, number
@@ -51,7 +51,10 @@ LIMIT 2;
 --count less than 6
 SELECT COUNT(*)
 FROM furniture
-WHERE number BETWEEN 1 AND 5;
+WHERE number BETWEEN 1 AND 5
+GROUP BY number;
 
 
-
+SELECT number, COUNT(*) AS total
+FROM furniture
+GROUP BY number;
