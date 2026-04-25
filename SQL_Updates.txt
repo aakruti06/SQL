@@ -1,0 +1,7 @@
+Day 1 : SQL Basic
+
+Day 2 : SQL GROUP BY, HAVING, COUNT(*)
+
+Day 3 : SQL Joins
+
+-------------------------------------------------------
