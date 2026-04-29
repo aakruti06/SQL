@@ -5,3 +5,21 @@ Day 2 : SQL GROUP BY, HAVING, COUNT(*)
 Day 3 : SQL Joins
 
 -------------------------------------------------------
+
+Day 4 : SQL Basic practice
+
+Day 5 : Mini project
+
+Day 6 : Mini project
+
+Day 7 : Practice
+
+Day 8 : Python + SQL project
+
+Day 9 : Python + SQL project
+
+Day 10 : Python + SQL project
+
+Day 11 : Github -> Python + SQL project.
+
+
