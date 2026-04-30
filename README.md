@@ -1,4 +1,4 @@
-# Python + MySQL Employee Management System
+#1. Python + MySQL Employee Management System
 
 ## Features
 - Add Employee
@@ -18,3 +18,21 @@
 
 ## Author
 Aakruti Kulkarni
+-----------------------------------------------------------------------------------------------------
+
+# 2 Student Marks Analyzer
+
+## Features
+- Add student marks
+- View students
+- Find topper
+- Calculate average marks
+- Pass/Fail filtering
+
+## Tech Stack
+- Python
+- MySQL
+
+## How to Run
+1. Create database student_project
+2. Run python3 student_app.py
