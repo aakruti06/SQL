@@ -16,8 +16,6 @@
 3. Run:
    python3 app.py
 
-## Author
-Aakruti Kulkarni
 -----------------------------------------------------------------------------------------------------
 
 # 2 Student Marks Analyzer
@@ -36,3 +34,15 @@ Aakruti Kulkarni
 ## How to Run
 1. Create database student_project
 2. Run python3 student_app.py
+
+
+
+
+
+
+
+
+
+---------------------------
+## Author
+Aakruti Kulkarni
