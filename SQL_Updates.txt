@@ -23,3 +23,7 @@ Day 10 : Python + SQL project
 Day 11 : Github -> Python + SQL project.
 
 Day 12 : Basics practice
+
+Day 13 : Project
+
+
