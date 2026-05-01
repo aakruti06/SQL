@@ -1,3 +1,2 @@
-
 GRANT ALL PRIVILEGES ON employee_project.* TO 'aakruti'@'localhost';
 FLUSH PRIVILEGES;
