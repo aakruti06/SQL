@@ -71,13 +71,62 @@ def filter_contacts():
 		print(row)
 
 
+#update contact
+def update_contact():
+	name = input("Enter name to update: ")
+	new_num = int(input("Enter new number: "))
+
+	query = """
+	UPDATE contacts
+	SET num = %s
+	WHERE name = %s
+	"""
+	cursor.execute(query,(new_num,name))
+	conn.commit()
+
+	print("Contact updated ")
+
+#delete contact
+def delete_contact():
+	name = input("Enter name to delete: ")
+	
+	query = "DELETE FROM contacts WHERE name = %s"
+	cursor.execute(query,(name,))
+	conn.commit()
+
+	print("Contact deleted ")
+
+#search by name
+def search():
+	name = input("Enter name to search: ")
+	
+	query =  """
+	SELECT name 
+	FROM contacts
+	WHERE name = %s
+	"""
+	cursor.execute(query,(name,))
+	result = cursor.fetchall()
+
+	if result:
+		for row in result:
+			print(row)
+	else:
+		print("No contact found")
+	
+#	print("Found ")
+
+
 while True:
 	print("\n1. Add phone: ")
 	print("2. Add contacts ")
 	print("3. View contacts ")
 	print("4. Count contacts by phone id ")
 	print("5. Fliter by phone code ")
-	print("6. Exit ")
+	print("6. Update contact ")
+	print("7. Delete contact ")
+	print("8. Search by name ")
+	print("9. Exit ")
 
 	choice = input("Enter choice: ")
 	if choice == '1':
@@ -91,6 +140,12 @@ while True:
 	elif choice == '5':
 		filter_contacts()
 	elif choice == '6':
+		update_contact()
+	elif choice == '7':
+		delete_contact()
+	elif choice == '8':
+		search()
+	elif choice == '9':
 		print("Exit...")
 		break
 	else:
