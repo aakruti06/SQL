@@ -24,7 +24,8 @@ def add_contacts():
 	name = input("Enter name: ")
 	num = int(input("Enter number: "))
 	self_num = int(input("Enter phone code: "))
-		
+	grp = input("Enter group: ")
+	
 	query = "INSERT INTO contacts(name, num, self_num) VALUES (%s, %s, %s)"
 	cursor.execute(query, (name, num, self_num))
 	conn.commit()
@@ -33,7 +34,7 @@ def add_contacts():
 #view contacts
 def view_contacts():
 	query = """
-	SELECT c.name, c.num, p.self_num
+	SELECT c.name, c.num, p.self_num, c.grp
 	FROM phone p
 	JOIN contacts c
 	ON p.self_num = c.self_num
@@ -116,6 +117,19 @@ def search():
 	
 #	print("Found ")
 
+#filter by group
+def filter_grp():
+	grp = input("Enter group: ")
+
+	query = """
+	SELECT name, num
+	FROM contacts
+	WHERE grp = %s
+	"""
+	
+	cursor.execute(query,(grp,))
+	for row in cursor.fetchall():
+		print(row)
 
 while True:
 	print("\n1. Add phone: ")
@@ -126,7 +140,8 @@ while True:
 	print("6. Update contact ")
 	print("7. Delete contact ")
 	print("8. Search by name ")
-	print("9. Exit ")
+	print("9. Filter by groups ")
+	print("10. Exit ")
 
 	choice = input("Enter choice: ")
 	if choice == '1':
@@ -146,6 +161,8 @@ while True:
 	elif choice == '8':
 		search()
 	elif choice == '9':
+		filter_grp()
+	elif choice == '10':
 		print("Exit...")
 		break
 	else:
