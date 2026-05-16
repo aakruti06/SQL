@@ -1,0 +1,180 @@
+🚀 EXPENSE TRACKER PROJECT (Python + MySQL)
+🧱 1. DATABASE SETUP
+✅ Create Database
+CREATE DATABASE expense_tracker;
+USE expense_tracker;
+✅ Create Tables
+Category Table
+CREATE TABLE category (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(50)
+);
+Expense Table
+CREATE TABLE expense (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    amount INT,
+    category_id INT,
+    description VARCHAR(100),
+    exp_date DATE,
+    FOREIGN KEY (category_id) REFERENCES category(id)
+);
+✅ Insert Default Categories
+INSERT INTO category(name) VALUES
+('food'),
+('travel'),
+('shopping'),
+('bills');
+🧠 2. FEATURES (WHAT YOU WILL BUILD)
+
+✔ Add expense
+✔ View all expenses (JOIN)
+✔ Filter by category
+✔ Monthly total
+✔ Category-wise spending
+✔ Delete expense
+
+👉 This is already resume-level
+
+🐍 3. PYTHON CODE (MAIN STRUCTURE)
+🔗 DB CONNECTION
+import mysql.connector
+
+conn = mysql.connector.connect(
+    host="localhost",
+    user="aakruti",
+    password="akM@4225",
+    database="expense_tracker"
+)
+
+cursor = conn.cursor()
+➕ ADD EXPENSE
+def add_expense():
+    amount = int(input("Enter amount: "))
+    category_id = int(input("Enter category id: "))
+    desc = input("Enter description: ")
+    date = input("Enter date (YYYY-MM-DD): ")
+
+    query = """
+    INSERT INTO expense(amount, category_id, description, exp_date)
+    VALUES (%s, %s, %s, %s)
+    """
+
+    cursor.execute(query, (amount, category_id, desc, date))
+    conn.commit()
+
+    print("Expense added")
+📄 VIEW ALL (JOIN)
+def view_expenses():
+    query = """
+    SELECT e.id, e.amount, c.name, e.description, e.exp_date
+    FROM expense e
+    JOIN category c
+    ON e.category_id = c.id
+    ORDER BY e.exp_date DESC
+    """
+
+    cursor.execute(query)
+
+    for row in cursor.fetchall():
+        print(row)
+🔍 FILTER BY CATEGORY
+def filter_category():
+    cat = input("Enter category name: ")
+
+    query = """
+    SELECT e.amount, e.description, e.exp_date
+    FROM expense e
+    JOIN category c
+    ON e.category_id = c.id
+    WHERE c.name = %s
+    """
+
+    cursor.execute(query, (cat,))
+
+    for row in cursor.fetchall():
+        print(row)
+📊 MONTHLY TOTAL
+def monthly_total():
+    month = input("Enter month (YYYY-MM): ")
+
+    query = """
+    SELECT SUM(amount)
+    FROM expense
+    WHERE exp_date LIKE %s
+    """
+
+    cursor.execute(query, (month + "%",))
+
+    print("Total:", cursor.fetchone()[0])
+📈 CATEGORY-WISE SPENDING
+def category_summary():
+    query = """
+    SELECT c.name, SUM(e.amount)
+    FROM expense e
+    JOIN category c
+    ON e.category_id = c.id
+    GROUP BY c.name
+    """
+
+    cursor.execute(query)
+
+    for row in cursor.fetchall():
+        print(row)
+❌ DELETE EXPENSE
+def delete_expense():
+    eid = int(input("Enter expense id: "))
+
+    query = "DELETE FROM expense WHERE id = %s"
+    cursor.execute(query, (eid,))
+    conn.commit()
+
+    print("Deleted")
+📋 MENU
+while True:
+    print("\n1. Add Expense")
+    print("2. View Expenses")
+    print("3. Filter by Category")
+    print("4. Monthly Total")
+    print("5. Category Summary")
+    print("6. Delete Expense")
+    print("7. Exit")
+
+    choice = input("Enter choice: ")
+
+    if choice == '1':
+        add_expense()
+    elif choice == '2':
+        view_expenses()
+    elif choice == '3':
+        filter_category()
+    elif choice == '4':
+        monthly_total()
+    elif choice == '5':
+        category_summary()
+    elif choice == '6':
+        delete_expense()
+    elif choice == '7':
+        break
+    else:
+        print("Invalid choice")
+🎯 WHY THIS PROJECT IS STRONG
+
+You are showing:
+
+SQL JOIN
+GROUP BY
+SUM (aggregation)
+Filtering
+Date handling
+Real-world logic
+💡 NEXT LEVEL UPGRADES (OPTIONAL 🔥)
+
+After this works:
+
+Add budget limit
+Show highest expense
+Show top category
+Add search by date range
+🧠 RESUME LINE
+
+Built a CLI-based Expense Tracker using Python and MySQL with category-wise analytics, monthly reporting, and relational database design.
