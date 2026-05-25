@@ -19,6 +19,8 @@ def add_phone():
 	conn.commit()
 	print("phone added")
 
+#--------------------------------------------------------------------------------
+
 #add contact
 def add_contacts():
 	name = input("Enter name: ")
@@ -31,6 +33,8 @@ def add_contacts():
 	conn.commit()
 	print("contact added")
 
+#---------------------------------------------------------------------------------
+
 #view contacts
 def view_contacts():
 	query = """
@@ -42,6 +46,8 @@ def view_contacts():
 	cursor.execute(query)
 	for row in cursor.fetchall():
 		print(row)
+
+#---------------------------------------------------------
 
 #count contacts by phone id
 def count_contacts():
@@ -58,6 +64,8 @@ def count_contacts():
 	cursor.execute(query, (pid,))
 	print("Total contacts: ",cursor.fetchone()[0])
 
+#--------------------------------------------------------
+
 #filter contacts by phone code
 def filter_contacts():
 	code = int(input("Enter phone code: "))
@@ -71,6 +79,7 @@ def filter_contacts():
 	for row in cursor.fetchall():
 		print(row)
 
+#----------------------------------------------
 
 #update contact
 def update_contact():
@@ -87,6 +96,8 @@ def update_contact():
 
 	print("Contact updated ")
 
+#-------------------------------------------
+
 #delete contact
 def delete_contact():
 	name = input("Enter name to delete: ")
@@ -96,6 +107,8 @@ def delete_contact():
 	conn.commit()
 
 	print("Contact deleted ")
+
+#----------------------------------------------
 
 #search by name
 def search():
@@ -115,7 +128,9 @@ def search():
 	else:
 		print("No contact found")
 	
-#	print("Found ")
+###	print("Found ")
+
+#-----------------------------------------------
 
 #filter by group
 def filter_grp():
@@ -131,6 +146,39 @@ def filter_grp():
 	for row in cursor.fetchall():
 		print(row)
 
+#-----------------------------------------------
+
+#sort by group
+def sort_grp():
+	grp = input("Enter grp: ")
+
+	query = """
+	SELECT c.name, c.num
+	FROM contacts c
+	JOIN phone p
+	ON c.self_num = p.self_num
+	ORDER BY c.grp = %s
+	"""
+	
+	cursor.execute(query,(grp,))
+	for row in cursor.fetchall():
+		print(row)
+
+#-----------------------------------------------
+
+# count number of groups
+def count_grp():
+	query = """
+	SELECT grp, COUNT(*)
+	FROM contacts
+	GROUP BY grp
+	ORDER BY grp DESC
+	"""
+	cursor.execute(query)
+	for row in cursor.fetchall():
+		print(row)
+#---------------------------------------------------------
+
 while True:
 	print("\n1. Add phone: ")
 	print("2. Add contacts ")
@@ -141,7 +189,9 @@ while True:
 	print("7. Delete contact ")
 	print("8. Search by name ")
 	print("9. Filter by groups ")
-	print("10. Exit ")
+	print("10. group count" )
+	print("11 Sort by groups ")
+	print("a. Exit ")
 
 	choice = input("Enter choice: ")
 	if choice == '1':
@@ -163,6 +213,10 @@ while True:
 	elif choice == '9':
 		filter_grp()
 	elif choice == '10':
+		count_grp()
+	elif choice == '11':
+		sort_grp()
+	elif choice == 'a':
 		print("Exit...")
 		break
 	else:
