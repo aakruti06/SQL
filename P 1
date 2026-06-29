@@ -1,10 +1,22 @@
 CREATE TABLE number(
-	id INT,
-    ch VARCHAR(15)
+  id INT PRIMARY KEY,
+  ch VARCHAR(15)
 );
 INSERT INTO number VALUES
-  (1,"one"),
-  (2,"two"),
-  (3,"three");
+(1,"one"),
+(2,"two"),
+(3,"three"),
+(4,"four"),
+(5,"five");
 
-SELECT * FROM number;
+CREATE TABLE square(
+  id INT,
+  sq INT,
+  FOREIGN KEY (id) REFERENCES number (id)
+);
+INSERT INTO square VALUES
+(1,1),
+(2,4),
+(3,9),
+(4,16),
+(5,25);
