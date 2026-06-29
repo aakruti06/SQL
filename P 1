@@ -1,0 +1,10 @@
+CREATE TABLE number(
+	id INT,
+    ch VARCHAR(15)
+);
+INSERT INTO number VALUES
+  (1,"one"),
+  (2,"two"),
+  (3,"three");
+
+SELECT * FROM number;
